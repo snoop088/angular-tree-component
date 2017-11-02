@@ -390,6 +390,23 @@ export class TreeModel implements ITreeModel {
       focusedNodeId: state.focusedNodeId
     });
   }
+  @action addFolder(name: string, node: TreeNode) {
+    let parentNode = this.virtualRoot;
+    if (node && node.isFolder) {
+      parentNode = node;
+    } else if (node && node.parent) {
+      parentNode = node.parent;
+    }
+    if (!parentNode.data.children) {
+      parentNode.data.children = [];
+    }
+    parentNode.data.children.push({
+      'name' : name,
+      'folder' : true,
+      'state': '0'
+    });
+    this.update();
+  }
 
   subscribeToState(fn) {
     autorun(() => fn(this.getState()));
@@ -399,6 +416,12 @@ export class TreeModel implements ITreeModel {
   private _canMoveNode(node, fromIndex, to) {
     // same node:
     if (node.parent === to.parent && fromIndex === to.index) {
+      return false;
+    }
+    if (!(this.options.allowFolderFromNode || to.parent.isFolder)) {
+      return false;
+    }
+    if (this.options.readOnly) {
       return false;
     }
 

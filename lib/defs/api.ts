@@ -5,7 +5,7 @@ export type IDType = string | number;
 export type IDTypeDictionary = { [id: string]: boolean } | { [id: number]: boolean };
 
 export interface IAllowDropFn {
-  (element: any, to: {parent: ITreeNode, index: number}, $event?: any): boolean;
+  (element: any, to: { parent: ITreeNode, index: number }, $event?: any): boolean;
 }
 
 export interface INodeHeightFn {
@@ -25,217 +25,221 @@ export interface ITreeState {
 }
 
 export interface ITreeOptions {
-   /**
-    * A string representing the attribute of the node that contains the array of children.
+  /**
+   * A string representing the attribute of the node that contains the array of children.
 
-    * **Default value: `children`.**
+   * **Default value: `children`.**
 
-    For example, if your nodes have a `nodes` attribute, that contains the children, use:
-    ```
-      options = { childrenField: 'nodes' }
-    ```
-    */
-   childrenField?: string;
-   /**
-    * A string representing the attribute of the node to display.
-
-    * **Default value: `name`**
-
-      For example, if your nodes have a `title` attribute that should be displayed, use:
-      ```
-        options = { displayField: 'title' }
-      ```
-    */
-   displayField?: string;
-   /**
-    * A string representing the attribute of the node that contains the unique ID.
-      This will be used to construct the `path`, which is an array of IDs that point to the node.
-
-      * **Default value: `id`.**
-
-      For example, if your nodes have a `uuid` attribute, that contains the unique key, use:
-      ```
-        options = { idField: 'uuid' }
-      ```
-    */
-   idField?: string;
-   /**
-    * A string representing the attribute of the node that contains whether the node starts as expanded.
-
-      * **Default value: `isExpanded`.**
-
-      For example, if your nodes have an `expanded` attribute, that contains a boolean value, use:
-      ```
-        options = { isExpandedField: 'expanded' }
-      ```
-    */
-   isExpandedField?: string;
-   /**
-    * Function for loading a node's children.
-      The function receives a TreeNode, and returns a value or a promise that resolves to the node's children.
-
-      This function will be called whenever a node is expanded, the `hasChildren` field is true, and the `children` field is empty.
-      The result will be loaded into the node's children attribute.
-
-      Example:
-      ```
-      * options = {
-      *   getChildren: (node:TreeNode) => {
-      *     return request('/api/children/' + node.id);
-      *   }
-      * }
-      ```
-    */
-   getChildren?: (node: ITreeNode) => any;
-   /**
-    * Rewire which trigger causes which action using this attribute, or create custom actions / event bindings.
-    * See the [Action Mapping Section](https://angular2-tree.readme.io/docs/action-mapping) for more details.
-    */
-   actionMapping?: any;
-   /**
-    * Specify if dragging tree nodes is allowed.
-    * This could be a boolean, or a function that receives a TreeNode and returns a boolean
-
-    * **Default value: false**
-
-    Example:
-    ```
-    * options = {
-    *  allowDrag: true
-    * }
-    ```
-    */
-   allowDrag?: boolean | IAllowDragFn;
-   /**
-    * Specify whether dropping inside the tree is allowed. Optional types:
-    *  - boolean
-    *  - (element:any, to:{parent:ITreeNode, index:number}):boolean
-         A function that receives the dragged element, and the drop location (parent node and index inside the parent),
-         and returns true or false.
-
-    * **Default Value: true**
-
-    example:
-    ```
-    * options = {
-    *  allowDrop: (element, {parent, index}) => parent.isLeaf
-    * }
-    ```
+   For example, if your nodes have a `nodes` attribute, that contains the children, use:
+   ```
+     options = { childrenField: 'nodes' }
+   ```
    */
-   allowDrop?: boolean | IAllowDropFn;
-   /**
-   * Specify padding per node (integer).
-    Each node will have padding-left value of level * levelPadding, instead of using the default padding for children.
+  childrenField?: string;
+  /**
+   * A string representing the attribute of the node to display.
 
-    This option is good for example for allowing whole row selection, etc.
+   * **Default value: `name`**
 
-    You can alternatively use the tree-node-level-X classes to give padding on a per-level basis.
-
-    * **Default value: 0**
+     For example, if your nodes have a `title` attribute that should be displayed, use:
+     ```
+       options = { displayField: 'title' }
+     ```
    */
-   levelPadding?: number;
-   /**
-    * Specify a function that returns a class per node. Useful for styling the nodes individually.
+  displayField?: string;
+  /**
+   * A string representing the attribute of the node that contains the unique ID.
+     This will be used to construct the `path`, which is an array of IDs that point to the node.
 
-      Example:
-      ```
-      * options = {
-      *   nodeClass: (node:TreeNode) => {
-      *     return 'icon-' + node.data.icon;
-      *   }
-      * }
-      ```
-    */
-   nodeClass?: (node: ITreeNode) => string;
-   /**
-    Boolean flag to use the virtual scroll option.
+     * **Default value: `id`.**
 
-    To use this option, you must supply the height of the container, and the height of each node in the tree.
+     For example, if your nodes have a `uuid` attribute, that contains the unique key, use:
+     ```
+       options = { idField: 'uuid' }
+     ```
+   */
+  idField?: string;
+  /**
+   * A string representing the attribute of the node that contains whether the node starts as expanded.
 
-    You can also specify height for the dropSlot which is located between nodes.
+     * **Default value: `isExpanded`.**
 
-    * **Default Value: false**
+     For example, if your nodes have an `expanded` attribute, that contains a boolean value, use:
+     ```
+       options = { isExpandedField: 'expanded' }
+     ```
+   */
+  isExpandedField?: string;
+  /**
+   * Function for loading a node's children.
+     The function receives a TreeNode, and returns a value or a promise that resolves to the node's children.
 
-    example:
-    ```
-    * options = {
-    *   useVirtualScroll: true,
-    *   nodeHeight: (node: TreeNode) => node.myHeight,
-    *   dropSlotHeight: 3
-    * }
-    ```
-    */
-   useVirtualScroll?: boolean;
-   /**
-    * For use with `useVirtualScroll` option.
-    * Specify a height for nodes in pixels. Could be either:
-    * - number
-    * - (node: TreeNode) => number
+     This function will be called whenever a node is expanded, the `hasChildren` field is true, and the `children` field is empty.
+     The result will be loaded into the node's children attribute.
 
-    * **Default Value: 22**
-    */
-   nodeHeight?: number | INodeHeightFn;
-   /**
-    * For use with `useVirtualScroll` option.
-    * Specify a height for drop slots (located between nodes) in pixels
+     Example:
+     ```
+     * options = {
+     *   getChildren: (node:TreeNode) => {
+     *     return request('/api/children/' + node.id);
+     *   }
+     * }
+     ```
+   */
+  getChildren?: (node: ITreeNode) => any;
+  /**
+   * Rewire which trigger causes which action using this attribute, or create custom actions / event bindings.
+   * See the [Action Mapping Section](https://angular2-tree.readme.io/docs/action-mapping) for more details.
+   */
+  actionMapping?: any;
+  /**
+   * Specify if dragging tree nodes is allowed.
+   * This could be a boolean, or a function that receives a TreeNode and returns a boolean
 
-    * **Default Value: 2**
-    */
-   dropSlotHeight?: number;
-   /**
-    * Boolean whether or not to animate expand / collapse of nodes.
+   * **Default value: false**
 
-    * **Default Value: false**
-    */
-   animateExpand?: boolean;
-   /**
-    * Speed of expand animation (described in pixels per 17 ms).
+   Example:
+   ```
+   * options = {
+   *  allowDrag: true
+   * }
+   ```
+   */
+  allowDrag?: boolean | IAllowDragFn;
+  /**
+   * Specify whether dropping inside the tree is allowed. Optional types:
+   *  - boolean
+   *  - (element:any, to:{parent:ITreeNode, index:number}):boolean
+        A function that receives the dragged element, and the drop location (parent node and index inside the parent),
+        and returns true or false.
 
-    * **Default Value: 30**
-    */
-   animateSpeed?: number;
-   /**
-    * Increase of expand animation speed (described in multiply per 17 ms).
+   * **Default Value: true**
 
-    * **Default Value: 1.2**
-    */
-   animateAcceleration?: number;
-   /**
-    * Whether to scroll to the node to make it visible when it is selected.
+   example:
+   ```
+   * options = {
+   *  allowDrop: (element, {parent, index}) => parent.isLeaf
+   * }
+   ```
+  */
+  allowDrop?: boolean | IAllowDropFn;
+  /**
+  * Specify padding per node (integer).
+   Each node will have padding-left value of level * levelPadding, instead of using the default padding for children.
 
-    * **Default Value: true**
-    */
-    scrollOnSelect?: boolean;
-   /**
-    * Function to clone a node.
-    * Receives a TreeNode object, and returns a node object (only the data).
-    * This callback will be called when copying a node inside the tree,
-    * by either calling copyNode, or by dragging and holding the ctrl key
-    *
-    * For example:
-      ```
-        options: ITreeOptions = {
-          getNodeClone: (node) => ({
-            ...node.data,
-            id: uuid.v4(),
-            name: `copy of ${node.data.name}`
-          })
-        };
-      ```
-    *
-    * **Default Value: clone the node using Object.assign, and remove 'id' property**
-    */
-    getNodeClone?: (node: ITreeNode) => any;
-    /**
-     * Makes the tree right-to-left.
-     * This include direction, expander style, and change key binding (right key collapse and left key expands instead of vice-versa)
-     */
-    rtl?: boolean;
-    /**
-     * Specifies id of root node (virtualRoot)
-     */
-    rootId?: any;
- }
+   This option is good for example for allowing whole row selection, etc.
+
+   You can alternatively use the tree-node-level-X classes to give padding on a per-level basis.
+
+   * **Default value: 0**
+  */
+  levelPadding?: number;
+  /**
+   * Specify a function that returns a class per node. Useful for styling the nodes individually.
+
+     Example:
+     ```
+     * options = {
+     *   nodeClass: (node:TreeNode) => {
+     *     return 'icon-' + node.data.icon;
+     *   }
+     * }
+     ```
+   */
+  nodeClass?: (node: ITreeNode) => string;
+  /**
+   Boolean flag to use the virtual scroll option.
+
+   To use this option, you must supply the height of the container, and the height of each node in the tree.
+
+   You can also specify height for the dropSlot which is located between nodes.
+
+   * **Default Value: false**
+
+   example:
+   ```
+   * options = {
+   *   useVirtualScroll: true,
+   *   nodeHeight: (node: TreeNode) => node.myHeight,
+   *   dropSlotHeight: 3
+   * }
+   ```
+   */
+  useVirtualScroll?: boolean;
+  /**
+   * For use with `useVirtualScroll` option.
+   * Specify a height for nodes in pixels. Could be either:
+   * - number
+   * - (node: TreeNode) => number
+
+   * **Default Value: 22**
+   */
+  nodeHeight?: number | INodeHeightFn;
+  /**
+   * For use with `useVirtualScroll` option.
+   * Specify a height for drop slots (located between nodes) in pixels
+
+   * **Default Value: 2**
+   */
+  dropSlotHeight?: number;
+  /**
+   * Boolean whether or not to animate expand / collapse of nodes.
+
+   * **Default Value: false**
+   */
+  animateExpand?: boolean;
+  /**
+   * Speed of expand animation (described in pixels per 17 ms).
+
+   * **Default Value: 30**
+   */
+  animateSpeed?: number;
+  /**
+   * Increase of expand animation speed (described in multiply per 17 ms).
+
+   * **Default Value: 1.2**
+   */
+  animateAcceleration?: number;
+  /**
+   * Whether to scroll to the node to make it visible when it is selected.
+
+   * **Default Value: true**
+   */
+  scrollOnSelect?: boolean;
+  /**
+   * Function to clone a node.
+   * Receives a TreeNode object, and returns a node object (only the data).
+   * This callback will be called when copying a node inside the tree,
+   * by either calling copyNode, or by dragging and holding the ctrl key
+   *
+   * For example:
+     ```
+       options: ITreeOptions = {
+         getNodeClone: (node) => ({
+           ...node.data,
+           id: uuid.v4(),
+           name: `copy of ${node.data.name}`
+         })
+       };
+     ```
+   *
+   * **Default Value: clone the node using Object.assign, and remove 'id' property**
+   */
+  getNodeClone?: (node: ITreeNode) => any;
+  /**
+   * Makes the tree right-to-left.
+   * This include direction, expander style, and change key binding (right key collapse and left key expands instead of vice-versa)
+   */
+  rtl?: boolean;
+  /**
+   * Specifies id of root node (virtualRoot)
+   */
+  rootId?: any;
+
+   // SE5
+   allowFolderFromNode?: boolean;
+   readOnly?: boolean;
+}
 
 export interface ITreeNode {
   // properties
@@ -532,7 +536,7 @@ export interface ITreeModel {
    * @param to describes where to move the node to.
    * Contains a 'parent' node, an 'index', and a 'dropOnNode' - to distinguish between dropping between nodes or on the node
    */
-  moveNode(node: ITreeNode, to: {parent: ITreeNode, index: number, dropOnNode: boolean});
+  moveNode(node: ITreeNode, to: { parent: ITreeNode, index: number, dropOnNode: boolean });
   /**
    * Invokes a method for every node of the tree - depth first
    * @param fn  a function that receives the node

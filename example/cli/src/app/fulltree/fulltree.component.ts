@@ -51,8 +51,7 @@ const actionMapping:IActionMapping = {
     >
       <ng-template #treeNodeTemplate let-node>
         <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
-        <span class="pull-right">{{ childrenCount(node) }}</span>
-        <button (click)="go($event)">Custom Action</button>
+        
       </ng-template>
       <ng-template #loadingTemplate>Loading, please hold....</ng-template>
     </tree-root>
@@ -104,11 +103,35 @@ const actionMapping:IActionMapping = {
     (click)="activeNodes(tree.treeModel)">
     getActiveNodes()
   </button>
+  <button
+    (click)="addFolder(tree.treeModel)">
+    add Folder
+  </button>
   `
 })
 export class FullTreeComponent {
   nodes: any[];
   nodes2 = [{name: 'root'}, {name: 'root2'}];
+  customTemplateStringOptions: ITreeOptions = {
+    // displayField: 'subTitle',
+    isExpandedField: 'expanded',
+    idField: 'uuid',
+    getChildren: this.getChildren.bind(this),
+    actionMapping,
+    nodeHeight: 23,
+    allowDrag: (node) => {
+      // console.log('allowDrag?');
+      return true;
+    },
+    allowDrop: (node, {parent, index}) => {
+      // console.log('allowDrop? + ' + index);
+      return true;
+    },
+    useVirtualScroll: true,
+    animateExpand: true,
+    animateSpeed: 30,
+    animateAcceleration: 1.2
+  };
   constructor() {
   }
   ngOnInit() {
@@ -200,7 +223,9 @@ export class FullTreeComponent {
     });
     tree.treeModel.update();
   }
-
+  addFolder(tree) {
+    tree.addFolder('New Folder', tree.getFocusedNode());
+  }
   childrenCount(node: TreeNode): string {
     return node && node.children ? `(${node.children.length})` : '';
   }
@@ -215,26 +240,7 @@ export class FullTreeComponent {
       .setActiveAndVisible();
   }
 
-  customTemplateStringOptions: ITreeOptions = {
-    // displayField: 'subTitle',
-    isExpandedField: 'expanded',
-    idField: 'uuid',
-    getChildren: this.getChildren.bind(this),
-    actionMapping,
-    nodeHeight: 23,
-    allowDrag: (node) => {
-      // console.log('allowDrag?');
-      return true;
-    },
-    allowDrop: (node) => {
-      // console.log('allowDrop?');
-      return true;
-    },
-    useVirtualScroll: true,
-    animateExpand: true,
-    animateSpeed: 30,
-    animateAcceleration: 1.2
-  }
+  
   onEvent(event) {
     console.log(event);
   }

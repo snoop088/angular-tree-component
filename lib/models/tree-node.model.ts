@@ -30,6 +30,7 @@ export class TreeNode implements ITreeNode {
   }
 
   private _originalNode: any;
+  private _isFolder = false;
   get originalNode() { return this._originalNode; };
 
   constructor(public data: any, public parent: TreeNode, public treeModel: TreeModel, index: number) {
@@ -40,6 +41,10 @@ export class TreeNode implements ITreeNode {
 
     if (this.getField('children')) {
       this._initChildren();
+    }
+    // CHECK for tag in data
+    if (this.data['folder']) {
+      this._isFolder = true;
     }
   }
 
@@ -63,6 +68,9 @@ export class TreeNode implements ITreeNode {
 
   get id() {
     return this.getField('id');
+  }
+  get isFolder(): boolean {
+    return this._isFolder || this.hasChildren;
   }
 
   set id(value) {

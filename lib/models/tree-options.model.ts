@@ -83,6 +83,8 @@ export class TreeOptions {
   get scrollOnSelect(): boolean { return this.options.scrollOnSelect === undefined ? true : this.options.scrollOnSelect; }
   get rtl(): boolean { return !!this.options.rtl; }
   get rootId(): any {return this.options.rootId; }
+  get allowFolderFromNode(): boolean { return this.options.allowFolderFromNode; }
+  get readOnly(): boolean {return this.options.readOnly; }
   actionMapping: IActionMapping;
 
   constructor(private options: ITreeOptions = {}) {
