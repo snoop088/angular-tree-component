@@ -33,7 +33,7 @@ export class TreeModel implements ITreeModel {
   // CONTEXT MENU NODE
   private _contextMenuNode: TreeNode = null;
   get contextMenuNode(): TreeNode {
-    return this._contextMenuNode
+    return this._contextMenuNode;
   }
   set contextMenuNode(node: TreeNode) {
     this._contextMenuNode = node;
