@@ -130,7 +130,8 @@ export class FullTreeComponent {
     useVirtualScroll: true,
     animateExpand: true,
     animateSpeed: 30,
-    animateAcceleration: 1.2
+    animateAcceleration: 1.2,
+    readOnly: true
   };
   constructor() {
   }

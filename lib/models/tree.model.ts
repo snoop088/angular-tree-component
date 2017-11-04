@@ -30,6 +30,15 @@ export class TreeModel implements ITreeModel {
   private firstUpdate = true;
   private events: any;
 
+  // CONTEXT MENU NODE
+  private _contextMenuNode: TreeNode = null;
+  get contextMenuNode(): TreeNode {
+    return this._contextMenuNode
+  }
+  set contextMenuNode(node: TreeNode) {
+    this._contextMenuNode = node;
+  }
+
   // events
   fireEvent(event) {
     event.treeModel = this;

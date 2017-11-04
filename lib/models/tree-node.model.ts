@@ -31,6 +31,14 @@ export class TreeNode implements ITreeNode {
 
   private _originalNode: any;
   private _isFolder = false;
+  // OPEN CONTEXT FLAG
+  private _openContext = false;
+  get openContext(): boolean {
+    return this._openContext;
+  }
+  set openContext(value: boolean) {
+    this._openContext = value;
+  }
   get originalNode() { return this._originalNode; };
 
   constructor(public data: any, public parent: TreeNode, public treeModel: TreeModel, index: number) {
@@ -171,6 +179,7 @@ export class TreeNode implements ITreeNode {
   }
 
   allowDrop = (element, $event?) => {
+    if (this.options.readOnly) return false;
     return this.options.allowDrop(element, { parent: this, index: 0 }, $event);
   }
 
@@ -337,6 +346,21 @@ export class TreeNode implements ITreeNode {
   getSelfHeight() {
     return this.options.nodeHeight(this);
   }
+    // TOGGLE CONTEXT
+    toggleContext($event) {
+      $event.preventDefault();
+      if (this.treeModel.contextMenuNode && (this.treeModel.contextMenuNode.id !== this.id)) {
+        this.treeModel.contextMenuNode.openContext = false;
+      }
+      this.treeModel.contextMenuNode = this;
+      this._openContext = !this._openContext;
+      // reset context of previous, show this context
+    }
+    // RENAME
+    rename(newName: string) {
+      this.data.name = newName;
+      this.fireEvent({ eventName: TREE_EVENTS.updateData, node: this });
+    }
 
   @action _initChildren() {
     this.children = this.getField('children')
