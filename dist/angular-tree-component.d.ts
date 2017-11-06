@@ -17,7 +17,6 @@ import { TreeViewportComponent } from './components/tree-viewport.component';
 import { TreeDropDirective } from './directives/tree-drop.directive';
 import { TreeDragDirective } from './directives/tree-drag.directive';
 import './polyfills';
-export { TreeModel, TreeNode, TreeDraggedElement, TreeVirtualScroll, ITreeOptions, TREE_ACTIONS, KEYS, IActionMapping, IActionHandler, IAllowDropFn, IAllowDragFn, LoadingComponent, TreeComponent, TreeNodeComponent, TreeNodeContent, TreeDropDirective, TreeDragDirective, TreeNodeExpanderComponent, TreeNodeChildrenComponent, TreeNodeDropSlot, TreeNodeCollectionComponent, TreeViewportComponent, ITreeState };
 export declare class TreeModule {
 }
-export default TreeModule;
+export { TreeModel, TreeNode, TreeDraggedElement, TreeVirtualScroll, ITreeOptions, TREE_ACTIONS, KEYS, IActionMapping, IActionHandler, IAllowDropFn, IAllowDragFn, LoadingComponent, TreeComponent, TreeNodeComponent, TreeNodeContent, TreeDropDirective, TreeDragDirective, TreeNodeExpanderComponent, TreeNodeChildrenComponent, TreeNodeDropSlot, TreeNodeCollectionComponent, TreeViewportComponent, ITreeState };
