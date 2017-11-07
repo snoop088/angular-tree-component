@@ -123,15 +123,11 @@ export class FullTreeComponent {
       // console.log('allowDrag?');
       return true;
     },
-    allowDrop: (node, {parent, index}) => {
-      // console.log('allowDrop? + ' + index);
-      return true;
-    },
+    
     useVirtualScroll: true,
     animateExpand: true,
     animateSpeed: 30,
     animateAcceleration: 1.2,
-    readOnly: true
   };
   constructor() {
   }

@@ -16,6 +16,7 @@ import { TreeNode } from '../models/tree-node.model';
         [class.tree-node-leaf]="node.isLeaf"
         [class.tree-node-active]="node.isActive"
         [class.tree-node-focused]="node.isFocused"
+        [class.tree-node-folder]="node.isFolder"
         >
 
         <tree-node-drop-slot *ngIf="index === 0" [dropIndex]="node.index" [node]="node.parent"></tree-node-drop-slot>
