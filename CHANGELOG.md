@@ -1,3 +1,12 @@
+<a name="5.2.1"></a>
+# 5.2.1 (2017-15-11)
+* Fixing for Angular Universal
+* Fixing MobX index out of bounds
+
+<a name="5.2.0"></a>
+# 5.2.0 (2017-15-11)
+* Angular 5
+
 <a name="5.1.0"></a>
 * Removing dependencies from UMD bundle
 * Passing custom id to virtualRoot node

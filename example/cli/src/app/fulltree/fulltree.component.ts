@@ -38,7 +38,7 @@ const actionMapping:IActionMapping = {
   <form>
     <input #filter (keyup)="filterNodes(filter.value, tree)" placeholder="filter nodes"/>
   </form>
-  <div style="height: 400px; width: 300px">
+  <div style="height: 400px; width: 400px; overflow: hidden;">
 
     <tree-root
       #tree
@@ -179,29 +179,24 @@ export class FullTreeComponent {
         }
       ];
 
-      for(let i = 0; i < 4; i++) {
+      for (let i = 0; i < 1000; i++) {
         this.nodes.push({
           name: `rootDynamic${i}`,
           subTitle: `root created dynamically ${i}`,
-          children: new Array((i + 1) * 100).fill(null).map((item, n) => ({
-            name: `childDynamic${i}.${n}`,
-            subTitle: `child created dynamically ${i}`,
-            hasChildren: false
+          children: new Array(10).fill(null).map((item, n) => ({
+            name: `rootChildDynamic${i}.${n}`,
+            subTitle: `rootChildDynamicTitle${i}.${n}`
           }))
         });
       }
     }, 1);
   }
 
-  asyncChildren = [
-    {
-      name: 'child2.1',
-      subTitle: 'new and improved'
-    }, {
-      name: 'child2.2',
-      subTitle: 'new and improved2'
-    }
-  ];
+  asyncChildren = new Array(4).fill(null).map((item, n) => ({
+    name: 'async child2.' + n,
+    subTitle: 'async child ' + n,
+    hasChildren: n < 5
+  }));
 
   getChildren(node:any) {
     return new Promise((resolve, reject) => {
@@ -209,7 +204,7 @@ export class FullTreeComponent {
         return Object.assign({}, c, {
           hasChildren: node.level < 5
         });
-      })), 1000);
+      })), 2000);
     });
   }
 
