@@ -5,4 +5,5 @@ export declare const KEYS: {
     DOWN: number;
     ENTER: number;
     SPACE: number;
+    CONTEXT_MENU: number;
 };
