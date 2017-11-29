@@ -17,6 +17,7 @@ import { AsyncTreeComponent } from './async/async.component';
 import { SaveRestoreComponent } from './save-restore/save-restore.component';
 import { CheckboxesComponent } from './checkboxes/checkboxes.component';
 import { DragComponent } from './drag/drag.component';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DragComponent } from './drag/drag.component';
     FormsModule,
     TreeModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
