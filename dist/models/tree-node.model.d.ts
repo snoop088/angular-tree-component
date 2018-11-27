@@ -18,6 +18,7 @@ export declare class TreeNode implements ITreeNode {
     readonly elementRef: any;
     private _originalNode;
     private _isFolder;
+    private _isLoc;
     private _openContext;
     openContext: boolean;
     readonly originalNode: any;
@@ -32,6 +33,7 @@ export declare class TreeNode implements ITreeNode {
     readonly displayField: any;
     id: any;
     readonly isFolder: boolean;
+    readonly isLoc: boolean;
     getField(key: any): any;
     setField(key: any, value: any): void;
     _findAdjacentSibling(steps: any, skipHidden?: boolean): any;

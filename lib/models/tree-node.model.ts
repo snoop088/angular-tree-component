@@ -31,6 +31,7 @@ export class TreeNode implements ITreeNode {
 
   private _originalNode: any;
   private _isFolder = false;
+  private _isLoc = false;
   // OPEN CONTEXT FLAG
   private _openContext = false;
   get openContext(): boolean {
@@ -53,6 +54,10 @@ export class TreeNode implements ITreeNode {
     // CHECK for tag in data
     if (this.data['folder']) {
       this._isFolder = true;
+    }
+    // Used to set if a folder containes localised items
+    if (this.data['isloc']) {
+      this._isLoc = true;
     }
   }
 
@@ -79,6 +84,9 @@ export class TreeNode implements ITreeNode {
   }
   get isFolder(): boolean {
     return this._isFolder || this.hasChildren;
+  }
+  get isLoc(): boolean {
+    return this._isLoc;
   }
 
   set id(value) {
