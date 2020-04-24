@@ -32,6 +32,7 @@ export class TreeNode implements ITreeNode {
   private _originalNode: any;
   private _isFolder = false;
   private _isLoc = false;
+  private _locked = false;
   // OPEN CONTEXT FLAG
   private _openContext = false;
   get openContext(): boolean {
@@ -59,8 +60,15 @@ export class TreeNode implements ITreeNode {
     if (this.data['isloc']) {
       this._isLoc = true;
     }
+    this._locked = !!this.data['locked'];
   }
 
+  set locked(value) {
+    if (this._locked !== value) {
+      this._locked = value;
+      this.fireEvent({ eventName: TREE_EVENTS.updateData, node: this });
+    }
+  }
   // helper get functions:
   get hasChildren(): boolean {
     return !!(this.data.hasChildren || (this.children && this.children.length > 0));
@@ -87,6 +95,9 @@ export class TreeNode implements ITreeNode {
   }
   get isLoc(): boolean {
     return this._isLoc;
+  }
+  get locked(): boolean {
+    return this._locked;
   }
 
   set id(value) {
