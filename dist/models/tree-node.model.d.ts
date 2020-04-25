@@ -19,12 +19,12 @@ export declare class TreeNode implements ITreeNode {
     private _originalNode;
     private _isFolder;
     private _isLoc;
-    private _locked;
+    private _isLocked;
     private _openContext;
     openContext: boolean;
     readonly originalNode: any;
     constructor(data: any, parent: TreeNode, treeModel: TreeModel, index: number);
-    locked: boolean;
+    isLocked: boolean;
     readonly hasChildren: boolean;
     readonly isCollapsed: boolean;
     readonly isLeaf: boolean;
