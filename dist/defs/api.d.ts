@@ -286,6 +286,7 @@ export interface ITreeNode {
     isLeaf: boolean;
     hasChildren: boolean;
     isRoot: boolean;
+    isLocked: boolean;
     /**
      * @param skipHidden whether to skip hidden nodes
      * @returns next sibling (or null)

@@ -291,6 +291,7 @@ export interface ITreeNode {
   isLeaf: boolean;
   hasChildren: boolean;
   isRoot: boolean;
+  isLocked: boolean;
 
   // traversing
   /**
