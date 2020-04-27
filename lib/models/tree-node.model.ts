@@ -65,7 +65,7 @@ export class TreeNode implements ITreeNode {
 
   set isLocked(value) {
     if (this._isLocked !== value) {
-      this._isLocked = value;
+      this.data.isLocked = value;
       this.fireEvent({ eventName: TREE_EVENTS.updateData, node: this });
     }
   }
